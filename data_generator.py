@@ -10,11 +10,13 @@ def spoiler(f, x, params, mess):
     return res
 
 import numpy as np
+import pandas as pd
+import csv
 import matplotlib.pyplot as plt
 
 if __name__ == "__main__":
     np.random.seed(124)
-    x = np.linspace(-10*np.pi, 10*np.pi, 200)
+    x = np.linspace(-10*np.pi, 10*np.pi, 20)
     params = [0, 3]
     mn = 0.4
     mess = [0.6 - (np.random.rand()*mn - mn/2) for i in range(len(x))]
@@ -28,3 +30,16 @@ if __name__ == "__main__":
     plt.plot(x, y)
     plt.show()
     
+    data = np.array([x, y])
+    data = data.transpose()
+    
+    with open("data_nonlinear.csv", mode='w') as dat:
+        dat_w = csv.writer(dat, delimiter=',')
+        
+        for r in data:
+            dat_w.writerow(r)
+            
+            
+    data = pd.read_csv("data_nonlinear.csv", delimiter=',')
+    
+    print(data)
