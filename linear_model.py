@@ -9,8 +9,19 @@ import pandas as pd
 import numpy as np
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 data = pd.read_csv("data_linear.csv", delimiter=',', header=None)
+
+print("Data description:")
+print(data.describe())
+print(data.info())
+
+sns.pairplot(data)
+
+print("---------------------------------------")
+
+# Преобразование данных к необходимому формату
 
 x = np.array(data[0]).reshape(-1,1)
 y = np.array(data[1])
@@ -18,6 +29,7 @@ y = np.array(data[1])
 model = LinearRegression()
 
 model.fit(x, y)
+
 
 print('coefficient of determination:', model.score(x, y))
 print('coef:', model.coef_)
@@ -38,6 +50,14 @@ plt.show()
 #----------------------------------------------------------
 
 data = pd.read_csv("data_nonlinear.csv", delimiter=',', header=None)
+
+print("Data description:")
+print(data.describe())
+print(data.info())
+
+sns.pairplot(data)
+
+print("---------------------------------------")
 
 x = np.array(data[0]).reshape(-1,1)
 y = np.array(data[1])
@@ -61,3 +81,4 @@ plt.scatter(x, y, c="red", s=s)
 plt.plot(x, model.coef_*x + model.intercept_, linewidth=2)
 
 plt.show()
+

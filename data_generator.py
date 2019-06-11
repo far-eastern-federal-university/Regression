@@ -13,12 +13,29 @@ from mpl_toolkits.mplot3d import Axes3D
 import itertools as it
 
 def trend(x, a, b):
+    """
+        Линеная функция в произвольном n-мерном пространстве
+        x - список узлов (элементы n-мерного пространства)
+        a - список коэффициентов (элементы n-мерного пространства)
+        b - константа
+    """
     return np.dot(a, x) + b
 
 def sintrend(x, a, b, c, d):
-    return np.dot(a, x) + b*np.sin(c*x) + d
+    """
+        Нелинейная периодическая функция, представляющая собой
+        комбинацию линейной функции и синуса (функция скалярного аргумента)
+        x - список узлов (координаты на прямой)
+        a, b, c, d - скалярные параметры функции
+    """
+    return a*x + b*np.sin(c*x) + d
 
 def spoiler(f, params):
+    """
+        Функция, добавляющая нормальный шум к детерменированным значениям,
+        вычисленным на сетке для функции f
+        params - параметры нормального распределения
+    """
     return np.random.normal(loc=params[0], scale=params[1], size=f.shape) + f
 
 def plot_and_write(x, y, plotname, filename):
